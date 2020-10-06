@@ -14,8 +14,6 @@ export default function PizzaBlock({ name, imageUrl, price, types, sizes }) {
     setActiveSize(index);
   };
 
-  console.log(sizes);
-
   return (
     <div>
       <div className="pizza-block">
