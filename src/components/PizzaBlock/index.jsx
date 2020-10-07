@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 
-export default function PizzaBlock({ name, imageUrl, price, types, sizes }) {
+export default function PizzaBlock({ name, imageUrl, price, types, sizes, isLoading }) {
   const availableTypes = ['тонкое', 'традиционное'];
   const availableSizes = [26, 30, 40];
   const [activeType, setActiveType] = useState(types[0]);
