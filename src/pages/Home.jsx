@@ -21,8 +21,8 @@ export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPizzas());
-  }, [category, dispatch]);
+    dispatch(fetchPizzas(sortBy, category));
+  }, [category, dispatch, sortBy]);
 
   const onSelectCategory = React.useCallback(
     (index) => {
@@ -42,7 +42,7 @@ export default function Home() {
     <div className="container">
       <div className="content__top">
         <Categories activeCategory={category} onClick={onSelectCategory} items={categoryNames} />
-        <SortPopup activeSortType={sortBy} items={sortItems} onClickSortType={onSelectSortType} />
+        <SortPopup activeSortType={sortBy.type} items={sortItems} onClickSortType={onSelectSortType} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
