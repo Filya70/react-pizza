@@ -2,7 +2,16 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import Button from '../Button';
 
-export default function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza }) {
+export default function PizzaBlock({
+  id,
+  name,
+  imageUrl,
+  price,
+  types,
+  sizes,
+  onClickAddPizza,
+  addedCount,
+}) {
   const availableTypes = ['тонкое', 'традиционное'];
   const availableSizes = [26, 30, 40];
 
@@ -75,7 +84,7 @@ export default function PizzaBlock({ id, name, imageUrl, price, types, sizes, on
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          {addedCount && <i>{addedCount}</i>}
         </Button>
       </div>
     </div>
