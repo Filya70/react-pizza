@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { CartItem } from '../components';
-import { clearCart } from '../redux/actions/cart';
+import { clearCart, removeCartItem, plusCartItem, minusCartItem } from '../redux/actions/cart';
 import cartEmptyImg from '../assets/img/empty-cart.png';
 
 export default function Cart() {
@@ -18,6 +18,20 @@ export default function Cart() {
     if (window.confirm('Вы действительно хотите очистить корзину?')) {
       dispatch(clearCart());
     }
+  };
+
+  const onRemoveItem = (id) => {
+    if (window.confirm('Вы действительно хотите удалить пиццу из корзины?')) {
+      dispatch(removeCartItem(id));
+    }
+  };
+
+  const onPlusItem = (id) => {
+    dispatch(plusCartItem(id));
+  };
+
+  const onMinusItem = (id) => {
+    dispatch(minusCartItem(id));
   };
 
   return (
@@ -99,11 +113,15 @@ export default function Cart() {
           <div className="content__items">
             {addedPizzas.map((obj) => (
               <CartItem
+                id={obj.id}
                 name={obj.name}
                 type={obj.type}
                 size={obj.size}
                 totalPrice={items[obj.id].totalPrice}
                 totalCount={items[obj.id].items.length}
+                onRemove={onRemoveItem}
+                onMinus={onMinusItem}
+                onPlus={onPlusItem}
               />
             ))}
           </div>
@@ -117,7 +135,7 @@ export default function Cart() {
               </span>
             </div>
             <div className="cart__bottom-buttons">
-              <a href="/" className="button button--outline button--add go-back-btn">
+              <Link to="/" className="button button--outline button--add go-back-btn">
                 <svg
                   width="8"
                   height="14"
@@ -134,7 +152,7 @@ export default function Cart() {
                 </svg>
 
                 <span>Вернуться назад</span>
-              </a>
+              </Link>
               <div className="button pay-btn">
                 <span>Оплатить сейчас</span>
               </div>
